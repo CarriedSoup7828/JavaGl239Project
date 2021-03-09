@@ -139,10 +139,12 @@ public class Problem {
 //}
        // Figures.renderPoint(gl, new Vector(0.3, 0.3), 6);
 
-        //Figures.renderLine(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), 3);
+        Figures.renderLine(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), 3);
         //Figures.renderTriangle(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), new Vector(0, 1),  false);
         Figures.renderQuad(gl, new Vector(0.3, -0.3), new Vector(-0.4, 0.4), new Vector(-0.9, -0.1),  false);
         //Figures.renderCircle(gl, new Vector(0.3, -0.3), 360, 0.3, false);
+Point.render(gl, new Vector(0.13, 0.69), 6);
+Point.render(gl, new Vector(0.13, -0.69), 6);
 
 
     }

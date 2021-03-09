@@ -18,6 +18,7 @@ public class Figures {
         gl.glVertex2d(pos.x, pos.y);
         gl.glVertex2d(pos2.x, pos2.y);
         gl.glEnd();
+
     }
 
     public static void renderTriangle(GL2 gl, Vector pos, Vector pos2, Vector pos3, boolean field) {
@@ -65,28 +66,6 @@ public class Figures {
 
     }
 
-    public static void renderCircle(GL2 gl, Vector center, int n, double r, boolean field) {
-        if (field) {
-            gl.glBegin(GL2.GL_TRIANGLE_FAN);
-            for (int i = 0; i <= n; i++) {
-                double a = 2 * Math.PI / n * i;
-                double x = r * Math.cos(a);
-                double y = r * Math.sin(a);
-                gl.glVertex2d(x, y);
-            }
 
-            gl.glEnd();
-        } else {
-            gl.glBegin(GL2.GL_LINE_STRIP);
-            for (int i = 0; i <= n; i++) {
-                double a = 2 * Math.PI / n * i;
-                double x = r * Math.cos(a);
-                double y = r * Math.sin(a);
-                gl.glVertex2d(x, y);
-            }
-
-            gl.glEnd();
-        }
-    }
 }
 

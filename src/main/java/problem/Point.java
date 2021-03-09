@@ -64,8 +64,9 @@ public class Point {
      * Рисование точки
      *
      * @param gl переменная OpenGl для рисования
+     * @return
      */
-    void render(GL2 gl) {
+  public double render(GL2 gl) {
         if (isSolution)
             gl.glColor3d(1.0, 0.0, 0.0);
         else
@@ -82,7 +83,8 @@ public class Point {
         gl.glVertex2d(x, y);
         gl.glEnd();
         gl.glPointSize(1);
-    }
+        return (x);
+  }
 
     /**
      * Получить строковое представление точки
@@ -93,4 +95,5 @@ public class Point {
     public String toString() {
         return "Точка с координатами: {" + x + "," + y + "} из множества: " + setNumber;
     }
+
 }
