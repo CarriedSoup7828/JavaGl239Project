@@ -42,40 +42,51 @@ public class Figures {
         }
     }
 
-    public static void renderQuad(GL2 gl, Vector pos, Vector pos2, Vector pos3, Vector pos4, boolean field) {
+    public static void renderQuad(GL2 gl, Vector pos, Vector pos2, Vector pos4, boolean field) {
         if (field) {
             gl.glBegin(GL2.GL_QUADS);
             gl.glColor3d(0, 1, 0);
             gl.glVertex2d(pos.x, pos.y);
+            gl.glVertex2d(pos2.x, pos.y);
             gl.glVertex2d(pos2.x, pos2.y);
-            gl.glVertex2d(pos3.x, pos3.y);
-            gl.glVertex2d(pos4.x, pos4.y);
+            gl.glVertex2d(pos.x, pos2.y);
             gl.glEnd();
 
         } else {
             gl.glBegin(GL2.GL_LINE_STRIP);
             gl.glColor3d(0, 1, 0);
             gl.glVertex2d(pos.x, pos.y);
+            gl.glVertex2d(pos2.x, pos.y);
             gl.glVertex2d(pos2.x, pos2.y);
-            gl.glVertex2d(pos3.x, pos3.y);
-            gl.glVertex2d(pos4.x, pos4.y);
+            gl.glVertex2d(pos.x, pos2.y);
             gl.glVertex2d(pos.x, pos.y);
             gl.glEnd();
         }
 
     }
 
-    public static void renderCircle(GL2 gl, Vector center, int n, double r) {
-        gl.glBegin(GL2.GL_TRIANGLE_FAN);
-        for (int i = 0; i <= n; i++) {
-            double a = 2 * Math.PI / n * i;
-            double x = r * Math.cos(a);
-            double y = r * Math.sin(a);
-            gl.glVertex2d(x, y);
+    public static void renderCircle(GL2 gl, Vector center, int n, double r, boolean field) {
+        if (field) {
+            gl.glBegin(GL2.GL_TRIANGLE_FAN);
+            for (int i = 0; i <= n; i++) {
+                double a = 2 * Math.PI / n * i;
+                double x = r * Math.cos(a);
+                double y = r * Math.sin(a);
+                gl.glVertex2d(x, y);
+            }
+
+            gl.glEnd();
+        } else {
+            gl.glBegin(GL2.GL_LINE_STRIP);
+            for (int i = 0; i <= n; i++) {
+                double a = 2 * Math.PI / n * i;
+                double x = r * Math.cos(a);
+                double y = r * Math.sin(a);
+                gl.glVertex2d(x, y);
+            }
+
+            gl.glEnd();
         }
-
-        gl.glEnd();
-
     }
-
 }
+
