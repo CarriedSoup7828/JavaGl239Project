@@ -16,8 +16,8 @@ public class Rectangle {
     }
 
     public static Rectangle getRandomRectangle() {
-        Random r = new Random();
-        return (new Rectangle( r.nextInt(50) / 25 - 1,  r.nextInt(50) / 25 - 1)))
+        Random randomQuad = new Random();
+        return new Rectangle(new Vector ( (double)randomQuad.nextInt() *2 - 1,  (double)randomQuad.nextInt() / 25 - 1) , new Vector( (double)randomQuad.nextInt() *2 - 1,  (double)randomQuad.nextInt() / 25 - 1));
     }
 
 
