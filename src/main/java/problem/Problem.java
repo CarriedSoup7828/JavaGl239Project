@@ -33,23 +33,21 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
+    private ArrayList<Rectangle> rectangles;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
+        rectangles = new ArrayList<>();
     }
 
     /**
      * Добавить точку
-     *
-     * @param x      координата X точки
-     * @param y      координата Y точки
-     * @param setVal номер множества
      */
-    public void addPoint(double x, double y, int setVal) {
-        Point point = new Point(x, y, setVal);
+    public void addPoint(double x, double y) {
+        Point point = new Point(new Vector(x, y));
         points.add(point);
     }
 
@@ -63,7 +61,7 @@ public class Problem {
                 // если точки являются разными
                 if (p != p2) {
                     // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
+                    if (Math.abs(p.pos.x - p2.pos.x) < 0.0001 && Math.abs(p.pos.y - p2.pos.y) < 0.0001) {
                         p.isSolution = true;
                         p2.isSolution = true;
                     }
@@ -84,9 +82,8 @@ public class Problem {
             while (sc.hasNextLine()) {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
-                int setVal = sc.nextInt();
                 sc.nextLine();
-                Point point = new Point(x, y, setVal);
+                Point point = new Point(new Vector(x, y));
                 points.add(point);
             }
         } catch (Exception ex) {
@@ -101,7 +98,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+                out.printf("%.2f %.2f\n", point.pos.x, point.pos.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -116,8 +113,8 @@ public class Problem {
      */
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
-            Point p = Point.getRandomPoint();
-            points.add(p);
+            Rectangle r = Rectangle.getRandomRectangle();
+            rectangles.add(r);
         }
     }
 
@@ -134,18 +131,22 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-//for (Point point: points){
-        //  point.render(gl);
-//}
-       // Figures.renderPoint(gl, new Vector(0.3, 0.3), 6);
+        for (Rectangle rectangle : rectangles) {
+            rectangle.render(gl);
+        }
+        // Figures.renderPoint(gl, new Vector(0.3, 0.3), 6);
+//
+//        Figures.renderLine(gl, p., new Vector(0.13, 0.2), 3);
+//        //Figures.renderTriangle(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), new Vector(0, 1),  false);
+//        Figures.renderQuad(gl, new Vector(0.3, -0.3), new Vector(-0.4, 0.4), new Vector(-0.9, -0.1),  false);
+//        //Figures.renderCircle(gl, new Vector(0.3, -0.3), 360, 0.3, false);
 
-        Figures.renderLine(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), 3);
-        //Figures.renderTriangle(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), new Vector(0, 1),  false);
-        Figures.renderQuad(gl, new Vector(0.3, -0.3), new Vector(-0.4, 0.4), new Vector(-0.9, -0.1),  false);
-        //Figures.renderCircle(gl, new Vector(0.3, -0.3), 360, 0.3, false);
-Point.render(gl, new Vector(0.13, 0.69), 6);
-Point.render(gl, new Vector(0.13, -0.69), 6);
-
+//        Point point = new Point(new Vector(0.13, 0.2));
+//        Point point2 = new Point(new Vector(0, 1));
+//        point.render(gl);
+//        point2.render(gl);
+//        Rectangle rectangle = new Rectangle(new Vector(0.3, -0.3), new Vector(-0.4, 0.4));
+//        rectangle.render(gl);
 
     }
 

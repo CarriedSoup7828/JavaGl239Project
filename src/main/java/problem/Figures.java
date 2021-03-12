@@ -43,7 +43,7 @@ public class Figures {
         }
     }
 
-    public static void renderQuad(GL2 gl, Vector pos, Vector pos2, Vector pos4, boolean field) {
+    public static void renderQuad(GL2 gl, Vector pos, Vector pos2, Vector pos3, Vector pos4, boolean field) {
         if (field) {
             gl.glBegin(GL2.GL_QUADS);
             gl.glColor3d(0, 1, 0);
@@ -65,6 +65,31 @@ public class Figures {
         }
 
     }
+
+
+    public static void renderPQuad(GL2 gl, Vector pos, Vector pos2, boolean field) {
+        if (field) {
+            gl.glBegin(GL2.GL_QUADS);
+            gl.glColor3d(0, 1, 0);
+            gl.glVertex2d(pos.x, pos.y);
+            gl.glVertex2d(pos2.x, pos.y);
+            gl.glVertex2d(pos2.x, pos2.y);
+            gl.glVertex2d(pos.x, pos2.y);
+            gl.glEnd();
+
+        } else {
+            gl.glBegin(GL2.GL_LINE_STRIP);
+            gl.glColor3d(0, 1, 0);
+            gl.glVertex2d(pos.x, pos.y);
+            gl.glVertex2d(pos2.x, pos.y);
+            gl.glVertex2d(pos2.x, pos2.y);
+            gl.glVertex2d(pos.x, pos2.y);
+            gl.glVertex2d(pos.x, pos.y);
+            gl.glEnd();
+        }
+
+    }
+
 
 
 }
