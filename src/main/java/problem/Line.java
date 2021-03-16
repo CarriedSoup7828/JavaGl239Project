@@ -13,7 +13,7 @@ public class Line {
     }
 
     public void render(GL2 gl) {
-        Figures.renderLine(gl, p.pos, p2.pos, 3);
+        Figures.renderLine(gl,  p, p2, 3);
     }
 
 }

@@ -11,12 +11,12 @@ public class Figures {
         gl.glEnd();
     }
 
-    public static void renderLine(GL2 gl, Vector pos, Vector pos2, float width) {
+    public static void renderLine(GL2 gl, Point p, Point p2, float width) {
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
         gl.glColor3d(0, 1, 0);
-        gl.glVertex2d(pos.x, pos.y);
-        gl.glVertex2d(pos2.x, pos2.y);
+        gl.glVertex2d(p.x+3, p.y+3);
+        gl.glVertex2d(p2.x-3, p2.y-3);
         gl.glEnd();
 
     }

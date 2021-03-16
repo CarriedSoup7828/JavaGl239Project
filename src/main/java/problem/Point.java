@@ -9,14 +9,6 @@ import java.util.Random;
  */
 public class Point {
     /**
-     * константа множества 1
-     */
-    public static final int SET_1 = 0;
-    /**
-     * константа множества 2
-     */
-    public static final int SET_2 = 1;
-    /**
      * пересекается ли точка с точкой из другого множества
      * (является ли она решением)
      */
@@ -24,14 +16,17 @@ public class Point {
     /**
      * x - координата точки
      */
-    Vector pos;
+    double x;
+    double y;
+
 
     /**
      * Конструктор точки
      *
      */
-    Point(Vector pos) {
-        this.pos = pos;
+    Point(double x,double y) {
+        this.x = x;
+        this.y=y;
     }
 
     /**
@@ -41,7 +36,7 @@ public class Point {
      */
     static Point getRandomPoint() {
         Random r = new Random();
-        return new Point(new Vector((double) r.nextInt(50) / 25 - 1, (double) r.nextInt(50) / 25 - 1));
+        return new Point((double) r.nextInt(50) / 25 - 1, (double) r.nextInt(50) / 25 - 1);
     }
 
     /**
@@ -64,7 +59,7 @@ public class Point {
 //            }
         gl.glPointSize(3);
         gl.glBegin(GL.GL_POINTS);
-        gl.glVertex2d(pos.x, pos.y);
+        gl.glVertex2d(x, y);
         gl.glEnd();
         gl.glPointSize(1);
 
@@ -77,7 +72,7 @@ public class Point {
      */
     @Override
     public String toString() {
-        return "Точка с координатами: {" + pos.x + "," + pos.y + "}";
+        return "Точка с координатами: {" + x + "," + y + "}";
     }
 
 }

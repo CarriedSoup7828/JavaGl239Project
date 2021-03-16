@@ -26,8 +26,6 @@ public class Form extends JFrame {
     private JButton solveBtn;
     private JLabel problemText;
     private JButton addPoint;
-    private JRadioButton radioButton1;
-    private JRadioButton radioButton2;
     /**
      * таймер
      */
@@ -81,9 +79,6 @@ public class Form extends JFrame {
     private void initWidgets() {
         // задаём текст полю описания задачи
         problemText.setText("<html>" + Problem.PROBLEM_TEXT.replaceAll("\n", "<br>"));
-        // делаем первое радио выбранным
-        radioButton1.setSelected(true);
-        radioButton2.setSelected(false);
 
         addPoint.addActionListener(new ActionListener() {
             @Override

@@ -33,21 +33,22 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
-    private ArrayList<Rectangle> rectangles;
+    Rectangle rectangle;
+    Line line;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
-        rectangles = new ArrayList<>();
+        rectangle = new Rectangle(new Vector(0.1, 0.3), new Vector(-0.1, 0.4));
     }
 
     /**
      * Добавить точку
      */
     public void addPoint(double x, double y) {
-        Point point = new Point(new Vector(x, y));
+        Point point = new Point(x, y);
         points.add(point);
     }
 
@@ -57,17 +58,21 @@ public class Problem {
     public void solve() {
         // перебираем пары точек
         for (Point p : points) {
-            for (Point p2 : points) {
-                // если точки являются разными
-                if (p != p2) {
-                    // если координаты у них совпадают
-                    if (Math.abs(p.pos.x - p2.pos.x) < 0.0001 && Math.abs(p.pos.y - p2.pos.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
-                    }
-                }
-            }
+//            for (Point p2 : points) {
+//                // если точки являются разными
+//                if (p != p2) {
+//                    // если координаты у них совпадают
+//                    if (Math.abs(p.pos.x - p2.pos.x) < 0.0001 && Math.abs(p.pos.y - p2.pos.y) < 0.0001) {
+//                        p.isSolution = true;
+//                        p2.isSolution = true;
+//                    }
+//                }
+//            }
         }
+
+
+        line = new Line(new Point(0.1, 0.2), new Point(0.3, -0.1));
+
     }
 
     /**
@@ -83,7 +88,7 @@ public class Problem {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
                 sc.nextLine();
-                Point point = new Point(new Vector(x, y));
+                Point point = new Point(x, y);
                 points.add(point);
             }
         } catch (Exception ex) {
@@ -98,7 +103,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Point point : points) {
-                out.printf("%.2f %.2f\n", point.pos.x, point.pos.y);
+                out.printf("%.2f %.2f\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -113,8 +118,8 @@ public class Problem {
      */
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
-            Rectangle r = Rectangle.getRandomRectangle();
-            rectangles.add(r);
+            Point p = Point.getRandomPoint();
+            points.add(p);
         }
     }
 
@@ -123,6 +128,7 @@ public class Problem {
      */
     public void clear() {
         points.clear();
+        line = null;
     }
 
     /**
@@ -131,24 +137,13 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        for (Rectangle rectangle : rectangles) {
-            rectangle.render(gl);
-        }
-        // Figures.renderPoint(gl, new Vector(0.3, 0.3), 6);
-//
-//        Figures.renderLine(gl, p., new Vector(0.13, 0.2), 3);
-//        //Figures.renderTriangle(gl, new Vector(0.3, 0.3), new Vector(0.13, 0.2), new Vector(0, 1),  false);
-//        Figures.renderQuad(gl, new Vector(0.3, -0.3), new Vector(-0.4, 0.4), new Vector(-0.9, -0.1),  false);
-//        //Figures.renderCircle(gl, new Vector(0.3, -0.3), 360, 0.3, false);
+        for (Point point : points)
+            point.render(gl);
 
-//        Point point = new Point(new Vector(0.13, 0.2));
-//        Point point2 = new Point(new Vector(0, 1));
-//        point.render(gl);
-//        point2.render(gl);
-//        Rectangle rectangle = new Rectangle(new Vector(0.3, -0.3), new Vector(-0.4, 0.4));
-//        rectangle.render(gl);
-
+        rectangle.render(gl);
+        if (line != null)
+            line.render(gl);
+        Figures.renderLine(gl, new Point(0.1,0.36) , new Point (0.3, 0.56 ), 3);
     }
 
 }
-
