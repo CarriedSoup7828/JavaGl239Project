@@ -17,7 +17,10 @@ public class Rectangle {
 
     public static Rectangle getRandomRectangle() {
         Random randomQuad = new Random();
-        return new Rectangle(new Vector ( (double)randomQuad.nextInt() *2 - 1,  (double)randomQuad.nextInt() / 25 - 1) , new Vector( (double)randomQuad.nextInt() *2 - 1,  (double)randomQuad.nextInt() / 25 - 1));
+        return new Rectangle(
+                new Vector(randomQuad.nextDouble() * 2 - 1, randomQuad.nextDouble() * 2 - 1),
+                new Vector(randomQuad.nextDouble() * 2 - 1, randomQuad.nextDouble() * 2 - 1)
+        );
     }
 
 

@@ -26,6 +26,13 @@ public class Form extends JFrame {
     private JButton solveBtn;
     private JLabel problemText;
     private JButton addPoint;
+    private JButton randomQuad;
+    private JTextField x1RectField;
+    private JTextField y1RectField;
+    private JTextField x2RectField;
+    private JTextField y2RectField;
+    private JButton setRectBtn;
+    private JTextField quadCntField;
     /**
      * таймер
      */
@@ -88,10 +95,28 @@ public class Form extends JFrame {
                 renderer.problem.addPoint(x, y);
             }
         });
+
+        setRectBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double x1 = Double.parseDouble(x1RectField.getText());
+                double y1 = Double.parseDouble(y1RectField.getText());
+
+                double x2 = Double.parseDouble(x2RectField.getText());
+                double y2 = Double.parseDouble(y2RectField.getText());
+                renderer.problem.setRect(x1, y1, x2, y2);
+            }
+        });
         randomBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 renderer.problem.addRandomPoints(Integer.parseInt(pointCntField.getText()));
+            }
+        });
+        randomQuad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                renderer.problem.setRandomQuad();
             }
         });
         loadFromFileBtn.addActionListener(new ActionListener() {

@@ -52,22 +52,26 @@ public class Problem {
         points.add(point);
     }
 
+    public void setRect(double x1, double y1, double x2, double y2) {
+        rectangle = new Rectangle(new Vector(x1, y1), new Vector(x2, y2));
+    }
+
     /**
      * Решить задачу
      */
     public void solve() {
         // перебираем пары точек
         for (Point p : points) {
-//            for (Point p2 : points) {
-//                // если точки являются разными
-//                if (p != p2) {
-//                    // если координаты у них совпадают
-//                    if (Math.abs(p.pos.x - p2.pos.x) < 0.0001 && Math.abs(p.pos.y - p2.pos.y) < 0.0001) {
-//                        p.isSolution = true;
-//                        p2.isSolution = true;
-//                    }
-//                }
-//            }
+            for (Point p2 : points) {
+                // если точки являются разными
+                if (p != p2) {
+                    // если координаты у них совпадают
+                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
+                        p.isSolution = true;
+                        p2.isSolution = true;
+                    }
+                }
+            }
         }
 
 
@@ -123,6 +127,11 @@ public class Problem {
         }
     }
 
+
+    public void setRandomQuad() {
+        rectangle = Rectangle.getRandomRectangle();
+    }
+
     /**
      * Очистить задачу
      */
@@ -143,7 +152,8 @@ public class Problem {
         rectangle.render(gl);
         if (line != null)
             line.render(gl);
-        Figures.renderLine(gl, new Point(0.1,0.36) , new Point (0.3, 0.56 ), 3);
+
+       //. Figures.renderLine(gl, new Point(0.1, 0.36), new Point(0.3, 0.56), 3);
     }
 
 }
