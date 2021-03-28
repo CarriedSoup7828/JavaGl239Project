@@ -20,6 +20,15 @@ public class Figures {
         gl.glEnd();
 
     }
+    public static void renderLength(GL2 gl, Point pl, Point p2l, float width) {
+        gl.glLineWidth(width);
+        gl.glBegin(GL2.GL_LINES);
+        gl.glColor3d(0, 1, 0);
+        gl.glVertex2d(pl.x, pl.y);
+        gl.glVertex2d(p2l.x, p2l.y);
+        gl.glEnd();
+
+    }
 
     public static void renderTriangle(GL2 gl, Vector pos, Vector pos2, Vector pos3, boolean field) {
 
