@@ -17,9 +17,9 @@ public class Problem {
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
             "Задано множество точек в пространстве\n" +
-            "И'Параллельный' прямоугольник.Точки образуют всевозможные прямые\n "+
-            "Найти такую прямую(и такие 2 точки черз которые она проходит)\n"+
-            "что эта прямая пересекает указанный прямоугольник, при этом\n"+
+            "И'Параллельный' прямоугольник.Точки образуют всевозможные прямые\n " +
+            "Найти такую прямую(и такие 2 точки черз которые она проходит)\n" +
+            "что эта прямая пересекает указанный прямоугольник, при этом\n" +
             "длина отрезка прямой,находящейся внутри прямоугольника,максимальна.";
 
     /**
@@ -39,7 +39,6 @@ public class Problem {
     Rectangle rectangle;
     Line line;
     Length length;
-    ArrayList<Point> pointpl;
 
     /**
      * Конструктор класса задачи
@@ -65,6 +64,7 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
+        double maxLength = 0;
 
         // перебираем пары точек
         for (Point p : points) {
@@ -73,27 +73,35 @@ public class Problem {
                 if (p != p2) {
                     // если координаты у них не совпадают
                     if (Math.abs(p.x - p2.x) > 0.0001 && Math.abs(p.y - p2.y) > 0.0001) {
-                        line  = new Line(p, p2);
-                        double k= ((p.y- p2.y)/(p.x-p2.x));
-                        double b = (p.y- k*p.x);
-                        double x1 = (rectangle.a.y-b)/k;
-                        double y1 =rectangle.a.x*k+b;
-                        double x2 = (rectangle.b.y-b)/k;
-                        double y2 =rectangle.b.x*k+b;
-                        Point o1=new Point(x1, rectangle.a.y);
-                        Point o2=new Point(x2, rectangle.b.y);
-                        Point o3=new Point(rectangle.a.x,y1 );
-                        Point o4=new Point(rectangle.b.x,y2 );
+                        line = new Line(p, p2);
+                        double k = ((p.y - p2.y) / (p.x - p2.x));
+                        double b = (p.y - k * p.x);
+                        double x1 = (rectangle.a.y - b) / k;
+                        double y1 = rectangle.a.x * k + b;
+                        double x2 = (rectangle.b.y - b) / k;
+                        double y2 = rectangle.b.x * k + b;
+
+                        Point o1 = new Point(x1, rectangle.a.y);
+                        Point o2 = new Point(x2, rectangle.b.y);
+                        Point o3 = new Point(rectangle.a.x, y1);
+                        Point o4 = new Point(rectangle.b.x, y2);
+
+                        ArrayList<Point> pointpl = new ArrayList<>();
                         pointpl.add(o1);
                         pointpl.add(o2);
                         pointpl.add(o3);
                         pointpl.add(o4);
-                        for (Point point :pointpl){
-                            for (Point point1 : pointpl){
-                                if((point.x<=rectangle.a.x)&(point.x>=rectangle.b.x)&(point.y<=rectangle.a.y)&(point.y>=rectangle.b.y)){
-                                    if ((point1.x<=rectangle.a.x)&(point1.x>=rectangle.b.x)&(point1.y<=rectangle.a.y)&(point1.y>=rectangle.b.y)){
-                                        length = new Length(point,point1 );
-                                        double l = Math.sqrt(point.x*point.x+point.y*point.y)-Math.sqrt(point1.x*point1.x+point1.y*point1.y);
+
+                        for (Point point : pointpl) {
+                            for (Point point1 : pointpl) {
+                                if ((point.x <= rectangle.a.x) & (point.x >= rectangle.b.x) & (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y)) {
+                                    if ((point1.x <= rectangle.a.x) & (point1.x >= rectangle.b.x) & (point1.y <= rectangle.a.y) & (point1.y >= rectangle.b.y)) {
+                                        double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                        if (l > maxLength) {
+                                            maxLength = l;
+                                            line = new Line(p, p2);
+                                            length = new Length(point, point1);
+                                        }
                                     }
                                 }
                             }
@@ -102,9 +110,6 @@ public class Problem {
                 }
             }
         }
-
-        line = new Line(new Point(0.1, 0.2), new Point(0.3, -0.1));
-
     }
 
     /**
@@ -178,10 +183,12 @@ public class Problem {
             point.render(gl);
 
         rectangle.render(gl);
-        if (line != null)
+        if (line != null) {
             line.render(gl);
+            length.render(gl);
+        }
 
-       //. Figures.renderLine(gl, new Point(0.1, 0.36), new Point(0.3, 0.56), 3);
+        //. Figures.renderLine(gl, new Point(0.1, 0.36), new Point(0.3, 0.56), 3);
     }
 
 }
