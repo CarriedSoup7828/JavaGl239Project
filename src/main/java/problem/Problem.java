@@ -44,6 +44,7 @@ public class Problem {
      * Конструктор класса задачи
      */
     public Problem() {
+
         points = new ArrayList<>();
         rectangle = new Rectangle(new Vector(0.1, 0.3), new Vector(-0.1, 0.4));
     }
@@ -73,6 +74,7 @@ public class Problem {
                 if (p != p2) {
                     // если координаты у них не совпадают
                     if (Math.abs(p.x - p2.x) > 0.0001 && Math.abs(p.y - p2.y) > 0.0001) {
+                        length = new Length(p, p2);
                         line = new Line(p, p2);
                         double k = ((p.y - p2.y) / (p.x - p2.x));
                         double b = (p.y - k * p.x);
@@ -94,16 +96,21 @@ public class Problem {
 
                         for (Point point : pointpl) {
                             for (Point point1 : pointpl) {
-                                if ((point.x <= rectangle.a.x) & (point.x >= rectangle.b.x) & (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y)) {
-                                    if ((point1.x <= rectangle.a.x) & (point1.x >= rectangle.b.x) & (point1.y <= rectangle.a.y) & (point1.y >= rectangle.b.y)) {
-                                        double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
-                                        if (l > maxLength) {
-                                            maxLength = l;
-                                            line = new Line(p, p2);
-                                            length = new Length(point, point1);
-                                        }
-                                    }
+                                length = new Length(point, point1);
+                                double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                if (l > maxLength) {
+                                    maxLength = l;
+                                    System.out.println(maxLength);
                                 }
+                                // if (Math.abs(rectangle.a.x -point.x) >= 0 && Math.abs(rectangle.b.x -point.x) <= 0 && Math.abs(rectangle.a.y -point.y) <= 0 && Math.abs(rectangle.b.y -point.y) <= 0) {
+                                // if ((point.x <= rectangle.a.x) & (point.x >= rectangle.b.x) & (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y)) {
+                                // if ((point1.x <= rectangle.a.x) & (point1.x >= rectangle.b.x) & (point1.y <= rectangle.a.y) & (point1.y >= rectangle.b.y)) {
+                                //double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                // if (l > maxLength) {
+                                //   maxLength = l;
+                                //  line = new Line(point, point1);
+                                //  length = new Length(point, point1);
+                                // System.out.println(maxLength);
                             }
                         }
                     }
@@ -111,6 +118,9 @@ public class Problem {
             }
         }
     }
+    //  }
+    //     }
+    //   }
 
     /**
      * Загрузить задачу из файла
@@ -183,12 +193,11 @@ public class Problem {
             point.render(gl);
 
         rectangle.render(gl);
-        if (line != null) {
+        if (line != null && length != null) {
             line.render(gl);
             length.render(gl);
         }
 
-        //. Figures.renderLine(gl, new Point(0.1, 0.36), new Point(0.3, 0.56), 3);
     }
 
 }

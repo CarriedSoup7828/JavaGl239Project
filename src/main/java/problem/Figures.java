@@ -15,15 +15,15 @@ public class Figures {
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
         gl.glColor3d(0, 1, 0);
-        gl.glVertex2d(p.x+3, p.y+3);
-        gl.glVertex2d(p2.x-3, p2.y-3);
+        gl.glVertex2d(p.x+1.0, p.y+1.0);
+        gl.glVertex2d(p2.x-1.0, p2.y-1.0);
         gl.glEnd();
 
     }
     public static void renderLength(GL2 gl, Point pl, Point p2l, float width) {
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
-        gl.glColor3d(0, 1, 0);
+        gl.glColor3d(0, 1, 2);
         gl.glVertex2d(pl.x, pl.y);
         gl.glVertex2d(p2l.x, p2l.y);
         gl.glEnd();

@@ -9,6 +9,6 @@ public class Length {
 
     }
     public void render(GL2 gl) {
-        Figures.renderLength(gl,  pl, pl2, 3);
+        Figures.renderLength(gl,  pl, pl2, 1);
     }
 }
