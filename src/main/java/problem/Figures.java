@@ -11,19 +11,24 @@ public class Figures {
         gl.glEnd();
     }
 
+
     public static void renderLine(GL2 gl, Point p, Point p2, float width) {
+Vector o= new Vector(p.x-p2.x, p.y- p2.y);
+double l = Math.sqrt(o.x*o.x+ o.y* o.y);
+Vector k =new Vector(o.x/l*3, o.y/l*3);
+
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
         gl.glColor3d(0, 1, 0);
-        gl.glVertex2d(p.x+1.0, p.y+1.0);
-        gl.glVertex2d(p2.x-1.0, p2.y-1.0);
+        gl.glVertex2d(p.x+k.x, p.y+k.y);
+        gl.glVertex2d(p2.x-k.x, p2.y-k.y);
         gl.glEnd();
 
     }
     public static void renderLength(GL2 gl, Point pl, Point p2l, float width) {
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
-        gl.glColor3d(0, 1, 2);
+        gl.glColor3d(0, 1, 0);
         gl.glVertex2d(pl.x, pl.y);
         gl.glVertex2d(p2l.x, p2l.y);
         gl.glEnd();

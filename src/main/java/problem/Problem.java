@@ -96,7 +96,7 @@ public class Problem {
 
                         for (Point point : pointpl) {
                             for (Point point1 : pointpl) {
-                                length = new Length(point, point1);
+
                                 double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
                                 if (l > maxLength) {
                                     maxLength = l;
@@ -194,7 +194,7 @@ public class Problem {
 
         rectangle.render(gl);
         if (line != null && length != null) {
-            line.render(gl);
+           // line.render(gl);
             length.render(gl);
         }
 
