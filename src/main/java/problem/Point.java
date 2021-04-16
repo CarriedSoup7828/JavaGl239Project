@@ -47,7 +47,7 @@ public class Point {
      */
     public void render(GL2 gl) {
 //        if (isSolution)
-//            gl.glColor3d(1.0, 0.0, 0.0);
+            gl.glColor3d(1, 1, 1);
 //        else
 //            switch (setNumber) {
 //                case Point.SET_1:

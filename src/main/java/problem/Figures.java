@@ -6,7 +6,7 @@ public class Figures {
     public static void renderPoint(GL2 gl, Vector pos, float size) {
         gl.glPointSize(5);
         gl.glBegin(GL2.GL_POINTS);
-        gl.glColor3d(0, 1, 0);
+        gl.glColor3d(1, 1, 1);
         gl.glVertex2d(pos.x, pos.y);
         gl.glEnd();
     }
@@ -28,7 +28,7 @@ Vector k =new Vector(o.x/l*3, o.y/l*3);
     public static void renderLength(GL2 gl, Point pl, Point p2l, float width) {
         gl.glLineWidth(width);
         gl.glBegin(GL2.GL_LINES);
-        gl.glColor3d(0, 1, 0);
+        gl.glColor3d(1, 1, 1 );
         gl.glVertex2d(pl.x, pl.y);
         gl.glVertex2d(p2l.x, p2l.y);
         gl.glEnd();
