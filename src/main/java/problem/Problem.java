@@ -75,7 +75,7 @@ public class Problem {
                     // если координаты у них не совпадают
                     if (Math.abs(p.x - p2.x) > 0.0001 && Math.abs(p.y - p2.y) > 0.0001) {
                         //length = new Length(p, p2);
-                       // line = new Line(p, p2);
+                        // line = new Line(p, p2);
                         double k = ((p.y - p2.y) / (p.x - p2.x));
                         double b = (p.y - k * p.x);
                         double x1 = (rectangle.a.y - b) / k;
@@ -96,18 +96,22 @@ public class Problem {
 
                         for (Point point : pointpl) {
                             for (Point point1 : pointpl) {
-                                double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
-                                if (l > maxLength) {
-                                    maxLength = l;
-                                    length = new Length(point, point1);
-                                    line = new Line(point, point1);
-                                    //System.out.println(maxLength);
+                                if (((point.x <= rectangle.a.x) & (point.x >= rectangle.b.x) & (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y))) {
+                                    double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                    if (l > maxLength) {
+                                        maxLength = l;
+                                        length = new Length(point, point1);
+                                        line = new Line(point, point1);
+
+                                        //System.out.println(maxLength);
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
         }
     }
     //  }
