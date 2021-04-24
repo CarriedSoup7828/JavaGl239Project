@@ -95,23 +95,24 @@ public class Problem {
                         pointpl.add(o4);
 
                         for (Point point : pointpl) {
-                            for (Point point1 : pointpl) {
-                                if (((point.x <= rectangle.a.x) & (point.x >= rectangle.b.x) & (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y))) {
-                                    double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
-                                    if (l > maxLength) {
-                                        maxLength = l;
-                                        length = new Length(point, point1);
-                                        line = new Line(point, point1);
-
-                                        //System.out.println(maxLength);
+                            if (((point.x <= rectangle.a.x) & (point.y <= rectangle.a.y) & (point.x >= rectangle.b.x) & (point.y >= rectangle.b.y))||((point.x >= rectangle.a.x) & (point.y >= rectangle.a.y) & (point.x <= rectangle.b.x) & (point.y <= rectangle.b.y))) {
+                                for (Point point1 : pointpl) {
+                                    if (((point1.x <= rectangle.a.x) & (point1.y <= rectangle.a.y) & (point1.x >= rectangle.b.x) & (point1.y >= rectangle.b.y))||((point1.x >= rectangle.a.x) & (point1.y >= rectangle.a.y) & (point1.x <= rectangle.b.x) & (point1.y <= rectangle.b.y))) {
+                                        double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                        if (l > maxLength) {
+                                            maxLength = l;
+                                            length = new Length(point, point1);
+                                            line = new Line(point, point1);
+                                            System.out.println(maxLength);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
+            }
         }
     }
     //  }
@@ -186,12 +187,13 @@ public class Problem {
      */
     public void render(GL2 gl) {
         for (Point point : points)
-            point.render(gl);
+            point.render(gl, false);
 
         rectangle.render(gl);
         if (line != null && length != null) {
              line.render(gl);
             length.render(gl);
+
         }
 
     }

@@ -22,11 +22,10 @@ public class Point {
 
     /**
      * Конструктор точки
-     *
      */
-    Point(double x,double y) {
+    Point(double x, double y) {
         this.x = x;
-        this.y=y;
+        this.y = y;
     }
 
     /**
@@ -45,9 +44,10 @@ public class Point {
      * @param gl переменная OpenGl для рисования
      * @return
      */
-    public void render(GL2 gl) {
-//        if (isSolution)
-            gl.glColor3d(1, 1, 1);
+    public void render(GL2 gl, boolean red) {
+        if (red)
+            gl.glColor3d(1, 2, 1);
+        else gl.glColor3d(1, 1, 1);
 //        else
 //            switch (setNumber) {
 //                case Point.SET_1:
