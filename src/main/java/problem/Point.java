@@ -45,18 +45,14 @@ public class Point {
      * @return
      */
     public void render(GL2 gl, boolean red) {
-        if (red)
-            gl.glColor3d(1, 2, 1);
+        if (red){
+            gl.glColor3d(255, 255, 0);
+            gl.glPointSize(10);
+            gl.glBegin(GL.GL_POINTS);
+            gl.glVertex2d(x, y);
+            gl.glEnd();
+            gl.glPointSize(1);}
         else gl.glColor3d(1, 1, 1);
-//        else
-//            switch (setNumber) {
-//                case Point.SET_1:
-//                    gl.glColor3d(0.0, 1.0, 0.0);
-//                    break;
-//                case Point.SET_2:
-//                    gl.glColor3d(0.0, 0.0, 1.0);
-//                    break;
-//            }
         gl.glPointSize(3);
         gl.glBegin(GL.GL_POINTS);
         gl.glVertex2d(x, y);

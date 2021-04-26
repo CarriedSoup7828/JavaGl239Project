@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -39,12 +40,13 @@ public class Problem {
     Rectangle rectangle;
     Line line;
     Length length;
+    Point pointred;
+    Point pointres;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
-
         points = new ArrayList<>();
         rectangle = new Rectangle(new Vector(0.1, 0.3), new Vector(-0.1, 0.4));
     }
@@ -95,14 +97,24 @@ public class Problem {
                         pointpl.add(o4);
 
                         for (Point point : pointpl) {
-                            if (((point.x <= rectangle.a.x) & (point.y <= rectangle.a.y) & (point.x >= rectangle.b.x) & (point.y >= rectangle.b.y))||((point.x >= rectangle.a.x) & (point.y >= rectangle.a.y) & (point.x <= rectangle.b.x) & (point.y <= rectangle.b.y))) {
+                            if (((point.x <= rectangle.a.x)  & (point.x >= rectangle.b.x)& (point.y <= rectangle.a.y) & (point.y >= rectangle.b.y))||
+                                    ((point.x >= rectangle.a.x)& (point.x <= rectangle.b.x) & (point.y >= rectangle.a.y)  & (point.y <= rectangle.b.y)) ||
+                                    ((point.x <= rectangle.a.x)& (point.x >= rectangle.b.x) & (point.y >= rectangle.a.y)  & (point.y <= rectangle.b.y))||
+                                    ((point.x >= rectangle.a.x)& (point.x <= rectangle.b.x) & (point.y <= rectangle.a.y)  & (point.y >= rectangle.b.y))) {
+
                                 for (Point point1 : pointpl) {
-                                    if (((point1.x <= rectangle.a.x) & (point1.y <= rectangle.a.y) & (point1.x >= rectangle.b.x) & (point1.y >= rectangle.b.y))||((point1.x >= rectangle.a.x) & (point1.y >= rectangle.a.y) & (point1.x <= rectangle.b.x) & (point1.y <= rectangle.b.y))) {
-                                        double l = Math.sqrt(point.x * point.x + point.y * point.y) - Math.sqrt(point1.x * point1.x + point1.y * point1.y);
+                                    if (((point1.x <= rectangle.a.x)  & (point1.x >= rectangle.b.x)& (point1.y <= rectangle.a.y) & (point1.y >= rectangle.b.y))||
+                                            ((point1.x >= rectangle.a.x)& (point1.x <= rectangle.b.x) & (point1.y >= rectangle.a.y)  & (point1.y <= rectangle.b.y)) ||
+                                            ((point1.x <= rectangle.a.x)& (point1.x >= rectangle.b.x) & (point1.y >= rectangle.a.y)  & (point1.y <= rectangle.b.y))||
+                                            ((point1.x >= rectangle.a.x)& (point1.x <= rectangle.b.x) & (point1.y <= rectangle.a.y)  & (point1.y >= rectangle.b.y))) {
+                                        double l = Math.sqrt((point.x-point1.x)*(point.x-point1.x) + (point1.y - point1.y)*(point1.y - point1.y));
                                         if (l > maxLength) {
                                             maxLength = l;
                                             length = new Length(point, point1);
                                             line = new Line(point, point1);
+                                            pointred = new Point(p.x, p.y);
+                                            pointres = new Point(p2.x, p2.y);
+
                                             System.out.println(maxLength);
                                         }
                                     }
@@ -188,14 +200,15 @@ public class Problem {
     public void render(GL2 gl) {
         for (Point point : points)
             point.render(gl, false);
-
         rectangle.render(gl);
         if (line != null && length != null) {
              line.render(gl);
             length.render(gl);
+           pointred.render(gl, true);
+           pointres.render(gl, true);
+            }
 
         }
 
     }
 
-}
